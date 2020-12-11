@@ -1,0 +1,44 @@
+body {
+    background-color: #fafad2;
+    font-family: 'Open Sans', sans-serif;
+}
+.container-fluid {
+    padding: 15px;
+}
+
+.fcontainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fcontainer > div {
+  margin: 6px;
+}
+
+.alert-warning {
+    width: 100%;
+    align: center;
+    background-color: #fff0c3;
+    border-color: #eaca68;
+
+}
+
+.create-form {
+    width: 50%;
+}
+
+
+
+
+.bodylogo {
+  height: 75vh;
+}
+
+.asteriskField {
+    display: none;
+}
+
+.logo {
+    color: #ffc107;
+    font-size: 25rem;
+}

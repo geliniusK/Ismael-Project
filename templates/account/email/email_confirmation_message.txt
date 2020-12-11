@@ -1,0 +1,19 @@
+
+{% load account %}
+{% load i18n %}
+
+{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+Greetings, {{ user_display }}!
+
+We're very pleased to welcome you to Ismael, a platform created to help you organize and keep track of what you have to do.
+Breaking large tasks down into smaller ones is a good way not to feel overwhelmed and to keep the points coming.
+When you finally complete that very important task, don't hesitate to share with your followers!
+
+
+
+As an optional step, you can confirm your email address on {{ activate_url }}
+
+
+Thank you from {{ site_name }}
+
+{% endblocktrans %}{% endautoescape %}
