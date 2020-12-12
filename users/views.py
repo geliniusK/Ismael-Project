@@ -30,7 +30,7 @@ class UserDetailView(DetailView):
 
 class FollowingListView(ListView):
     model = get_user_model()
-    template_name = 'search_results.html'
+    template_name = 'following_list.html'
 
     def get_queryset(self):
         return self.request.user.friends.all()
@@ -38,7 +38,7 @@ class FollowingListView(ListView):
 
 class FollowersListView(ListView):
     model = get_user_model()
-    template_name = 'search_results.html'
+    template_name = 'followers_list.html'
 
     def get_queryset(self):
         return get_user_model().objects.filter(friends=self.request.user)

@@ -34,14 +34,11 @@ def itemCreateView(request):
     if request.method == 'POST':
         form = ItemForm(request.POST)
         if form.is_valid():
-            print('aqui chegou2')
-            print(form.cleaned_data['item'])
             new_entry = Item(description=form.cleaned_data['item'], author_id=request.user.id)
             new_entry.save()
             return redirect('home')
     else:
         form = ItemForm(request.POST)
-        print('aqui chegou5454')
     return render(request, 'home.html', {'form': form})
 
 

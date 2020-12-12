@@ -3,11 +3,12 @@
 {% block title %}{% endblock title %}
 
 {% block content2 %}
-<h1>Search Results</h1>
+<h1>Followers</h1>
 <hr>
 {% for user in object_list %}
-<div class="">
+<div>
   <h3><a href="{{ user.get_absolute_url }}">{{ user }}</a></h3>
 </div>
+<hr>
 {% endfor %}
 {% endblock content2 %}

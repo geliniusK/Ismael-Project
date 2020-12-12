@@ -1,11 +1,10 @@
 {% extends '_base.html' %}
 
-{% block title %}x{% endblock title %}
+{% block title %}{% endblock title %}
 
 {% block content2 %}
-<h1>Profile</h1>
-<p>{{ object.username }}</p>
-<p>this is a profile page</p>
+<h1>{{ object.username }}</h1>
+<p>[this is a profile page]</p>
 <br>
 {% if object in user.friends.all %}
 <form action="{% url 'unfollow' object.id %}?next={{ request.path }}" method="post">
