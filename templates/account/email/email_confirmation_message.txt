@@ -13,6 +13,6 @@ As an optional step, you can confirm your email address on {{ activate_url }}
 
 
 Regards,
-The {{ site_name }} Project Team
+The {{ site_name }} Team
 
 {% endblocktrans %}{% endautoescape %}
