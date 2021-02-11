@@ -8,10 +8,8 @@ from .models import Item
 from django.contrib import messages
 
 
-
-
 @login_required()
-def itemAddListView(request):
+def itemHomeListView(request):
 
     u = request.user
     if u.new_f.all():
@@ -19,17 +17,17 @@ def itemAddListView(request):
             messages.add_message(request, 60, f'{msg} is now following you')
         u.new_f.clear()
 
-
     context = {
-    'item_list': Item.objects.filter(author=request.user).exclude(visible_priv=False),
-    'us': get_user_model().objects.order_by('-score')[:5],
-    'item_public': Item.objects.filter(author__in=request.user.friends.all(), public=True).order_by('-share_time')[:5],
-    'form': ItemForm(request.POST)
+        'item_list': Item.objects.filter(author=request.user).exclude(visible_priv=False),
+        'us': get_user_model().objects.order_by('-score')[:5],
+        'item_public': Item.objects.filter(author__in=request.user.friends.all(), public=True).order_by('-share_time')[:5],
+        'form': ItemForm(request.POST)
     }
 
     return render(request, 'home.html', context)
 
 
+@login_required()
 def itemCreateView(request):
     if request.method == 'POST':
         form = ItemForm(request.POST)
@@ -42,6 +40,7 @@ def itemCreateView(request):
     return render(request, 'home.html', {'form': form})
 
 
+@login_required()
 def itemRemoveView(request, item_id):
     if request.method == 'POST':
         x = Item.objects.get(pk=item_id)
@@ -50,6 +49,7 @@ def itemRemoveView(request, item_id):
     return redirect("home")
 
 
+@login_required()
 def itemCompleteView(request, item_id):
     if request.method == 'POST':
         x = Item.objects.get(pk=item_id)

@@ -8,7 +8,7 @@ from .views import (
     FollowersListView,
     followUser,
     unfollowUser
-    )
+)
 
 urlpatterns = [
     path('signup/', SignupPageView.as_view(), name='signup'),

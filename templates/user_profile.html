@@ -4,7 +4,6 @@
 
 {% block content2 %}
 <h1>{{ object.username }}</h1>
-<p>[this is a profile page]</p>
 <br>
 {% if object in user.friends.all %}
 <form action="{% url 'unfollow' object.id %}?next={{ request.path }}" method="post">

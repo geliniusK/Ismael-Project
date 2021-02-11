@@ -5,6 +5,7 @@ from django.db import models
 from django.utils import timezone
 #from django.urls import reverse
 
+
 class Item(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     description = models.CharField(max_length=50)
@@ -14,10 +15,5 @@ class Item(models.Model):
     public = models.BooleanField(default=False)
     share_time = models.DateTimeField(null=True, blank=True)
 
-
-
     def __str__(self):
         return self.description
-# Create your models here.
-
-# Create your models here.

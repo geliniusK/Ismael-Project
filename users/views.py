@@ -1,10 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
-from django.urls import  reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 
 from .forms import CustomUserCreationForm
+
 
 class SignupPageView(CreateView):
     form_class = CustomUserCreationForm
@@ -12,23 +15,21 @@ class SignupPageView(CreateView):
     template_name = 'signup.html'
 
 
-class UserSearchView(ListView):
+class UserSearchView(LoginRequiredMixin, ListView):
     model = get_user_model()
     template_name = 'search_results.html'
-
 
     def get_queryset(self):
         query = self.request.GET.get('q')
         return get_user_model().objects.filter(username__icontains=query).exclude(username=self.request.user)
 
-class UserDetailView(DetailView):
+
+class UserDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'user_profile.html'
 
 
-
-
-class FollowingListView(ListView):
+class FollowingListView(LoginRequiredMixin, ListView):
     model = get_user_model()
     template_name = 'following_list.html'
 
@@ -36,7 +37,7 @@ class FollowingListView(ListView):
         return self.request.user.friends.all()
 
 
-class FollowersListView(ListView):
+class FollowersListView(LoginRequiredMixin, ListView):
     model = get_user_model()
     template_name = 'followers_list.html'
 
@@ -44,6 +45,7 @@ class FollowersListView(ListView):
         return get_user_model().objects.filter(friends=self.request.user)
 
 
+@login_required()
 def followUser(request, object_id):
     u1 = request.user
     u2 = get_user_model().objects.get(id=object_id)
@@ -55,6 +57,7 @@ def followUser(request, object_id):
     return HttpResponseRedirect(next)
 
 
+@login_required()
 def unfollowUser(request, object_id):
     u1 = request.user
     u2 = get_user_model().objects.get(id=object_id)

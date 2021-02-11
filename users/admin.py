@@ -6,11 +6,13 @@ from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 CustomUser = get_user_model()
 
+
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ['email', 'username', 'score',]
+    list_display = ['email', 'username', 'score', ]
+
 
 admin.site.register(CustomUser, CustomUserAdmin)
 

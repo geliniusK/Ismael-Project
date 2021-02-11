@@ -9,13 +9,14 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import dj_database_url
 import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ENVIRONMENT= os.environ.get('ENVIRONMENT', default='development')
+ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -40,12 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    #3rd party
+    # 3rd party
     'crispy_forms',
     'allauth',
     'allauth.account',
 
-    #local
+    # local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'todo.apps.TodoConfig',
@@ -136,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -151,9 +152,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # ALLAUTH
 
-LOGIN_REDIRECT_URL= 'home'
+LOGIN_REDIRECT_URL = 'home'
 
-ACCOUNT_LOGOUT_REDIRECTL= 'home'
+ACCOUNT_LOGOUT_REDIRECTL = 'home'
 
 SITE_ID = 1
 
@@ -183,7 +184,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 DEFAULT_FROM_EMAIL = 'projismael@gmail.com'
 
-#production
+# production
 if ENVIRONMENT == 'production':
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = 'DENY'
@@ -198,6 +199,5 @@ if ENVIRONMENT == 'production':
 
 
 # Heroku
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
